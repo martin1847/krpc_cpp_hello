@@ -1,0 +1,7 @@
+*.o
+krpc_server
+Makefile
+CMakeCache.txt
+*.a
+CMakeFiles
+cmake_install.cmake
