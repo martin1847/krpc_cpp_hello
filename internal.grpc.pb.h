@@ -31,7 +31,7 @@ namespace krpc {
 class KrpcBaseService final {
  public:
   static constexpr char const* service_full_name() {
-    return "krpc.KrpcBaseService.unused";
+    return "krpc.KrpcBaseService.unUsed";
   }
   class StubInterface {
    public:
@@ -90,7 +90,7 @@ class KrpcBaseService final {
 
   class Service : public ::grpc::Service {
    public:
-    Service();//const char *name);
+    Service(const char *name);
     virtual ~Service();
     virtual ::grpc::Status callUnary(::grpc::ServerContext* context, const ::krpc::InputProto* request, ::krpc::OutputProto* response);
   };
@@ -120,7 +120,7 @@ class KrpcBaseService final {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_callUnary() {
+    explicit WithCallbackMethod_callUnary(const char* name) : BaseClass(name) {
       ::grpc::Service::MarkMethodCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::krpc::InputProto, ::krpc::OutputProto>(
             [this](

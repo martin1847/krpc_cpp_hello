@@ -21,9 +21,10 @@
 #include <grpcpp/support/sync_stream.h>
 namespace krpc {
 
-static const char* KrpcBaseService_method_names[] = {
-  "/Demo/KrpcCpp/hello",
-};
+// Client Stub
+// static const char* KrpcBaseService_method_names[] = {
+//   "/Demo/KrpcCpp/hello",
+// };
 
 std::unique_ptr< KrpcBaseService::Stub> KrpcBaseService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
@@ -32,7 +33,7 @@ std::unique_ptr< KrpcBaseService::Stub> KrpcBaseService::NewStub(const std::shar
 }
 
 KrpcBaseService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_callUnary_(KrpcBaseService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_callUnary_("/DemoApp/KrpcService/hello", options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status KrpcBaseService::Stub::callUnary(::grpc::ClientContext* context, const ::krpc::InputProto& request, ::krpc::OutputProto* response) {
@@ -58,10 +59,10 @@ void KrpcBaseService::Stub::async::callUnary(::grpc::ClientContext* context, con
   return result;
 }
 
-KrpcBaseService::Service::Service(){//const char *name) {
+KrpcBaseService::Service::Service(const char *name) {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      KrpcBaseService_method_names[0],
-      // name,
+      // KrpcBaseService_method_names[0],
+      name,
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< KrpcBaseService::Service, ::krpc::InputProto, ::krpc::OutputProto, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](KrpcBaseService::Service* service,

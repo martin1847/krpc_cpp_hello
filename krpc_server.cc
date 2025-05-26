@@ -27,12 +27,7 @@
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
 #include "absl/strings/str_format.h"
-
-#ifdef BAZEL_BUILD
-#include "examples/protos/helloworld.grpc.pb.h"
-#else
 #include "internal.grpc.pb.h"
-#endif
 
 ABSL_FLAG(uint16_t, port, 50051, "Server port for the service");
 
@@ -41,19 +36,22 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerUnaryReactor;
 using grpc::Status;
-using krpc::KrpcBaseService;
 using krpc::InputProto;
+using krpc::KrpcBaseService;
 using krpc::OutputProto;
 
 // Logic and data behind the server's behavior.
-class GreeterServiceImpl final : public KrpcBaseService::CallbackService {
+class DemoServiceImpl final : public KrpcBaseService::CallbackService {
+ public:
+  explicit DemoServiceImpl(const char* name)
+      : KrpcBaseService::CallbackService(name) {}
   ServerUnaryReactor* callUnary(CallbackServerContext* context,
-                               const InputProto* request,
-                               OutputProto* reply) override {
+                                const InputProto* request,
+                                OutputProto* reply) override {
     std::string prefix("Hello KRPC : get ");
-    std::string msg = "\""+prefix + request->utf8() + "\"";
-    std::cout << prefix << "\t[debug]\t "<< msg << std::endl;
-    reply->set_utf8(msg);
+    auto msg_json = "\"" + prefix + request->utf8() + "\"";
+    std::cout << prefix << "\t[debug]\t " << msg_json << std::endl;
+    reply->set_utf8(msg_json);
 
     ServerUnaryReactor* reactor = context->DefaultReactor();
     reactor->Finish(Status::OK);
@@ -63,16 +61,16 @@ class GreeterServiceImpl final : public KrpcBaseService::CallbackService {
 
 void RunServer(uint16_t port) {
   std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
-  GreeterServiceImpl service;
+  DemoServiceImpl hello_service("/Demo/KrpcCpp/hello");
 
-  grpc::EnableDefaultHealthCheckService(true);
-  grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+  // grpc::EnableDefaultHealthCheckService(true);
+  // grpc::reflection::InitProtoReflectionServerBuilderPlugin();
   ServerBuilder builder;
   // Listen on the given address without any authentication mechanism.
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
   // Register "service" as the instance through which we'll communicate with
   // clients. In this case it corresponds to an *synchronous* service.
-  builder.RegisterService(&service);
+  builder.RegisterService(&hello_service);
   // Finally assemble the server.
   std::unique_ptr<Server> server(builder.BuildAndStart());
   std::cout << "Server listening on " << server_address << std::endl;
