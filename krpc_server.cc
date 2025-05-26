@@ -41,10 +41,10 @@ using krpc::KrpcBaseService;
 using krpc::OutputProto;
 
 // Logic and data behind the server's behavior.
-class DemoServiceImpl final : public KrpcBaseService::CallbackService {
+class HelloServiceImpl final : public KrpcBaseService::CallbackService {
  public:
-  explicit DemoServiceImpl(const char* name)
-      : KrpcBaseService::CallbackService(name) {}
+  HelloServiceImpl() : KrpcBaseService::CallbackService("/Demo/KrpcCpp/hello") {}
+
   ServerUnaryReactor* callUnary(CallbackServerContext* context,
                                 const InputProto* request,
                                 OutputProto* reply) override {
@@ -61,7 +61,7 @@ class DemoServiceImpl final : public KrpcBaseService::CallbackService {
 
 void RunServer(uint16_t port) {
   std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
-  DemoServiceImpl hello_service("/Demo/KrpcCpp/hello");
+  HelloServiceImpl hello_service;
 
   // grpc::EnableDefaultHealthCheckService(true);
   // grpc::reflection::InitProtoReflectionServerBuilderPlugin();
