@@ -29,7 +29,7 @@ namespace krpc {
 inline constexpr OutputProto::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        c_{0},
+        code_{0},
         data_{},
         _oneof_case_{} {}
 
@@ -105,13 +105,11 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::krpc::OutputProto, _impl_.c_),
-        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::krpc::OutputProto, _impl_.code_),
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::krpc::OutputProto, _impl_.data_),
         0,
-        ~0u,
         ~0u,
         ~0u,
 };
@@ -119,7 +117,7 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, 9, -1, sizeof(::krpc::InputProto)},
-        {10, 23, -1, sizeof(::krpc::OutputProto)},
+        {10, 22, -1, sizeof(::krpc::OutputProto)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::krpc::_InputProto_default_instance_._instance,
@@ -128,17 +126,16 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_internal_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\016internal.proto\022\004krpc\"\032\n\nInputProto\022\014\n\004"
-    "utf8\030\002 \001(\t\"K\n\013OutputProto\022\t\n\001c\030\001 \001(\005\022\013\n\001"
-    "m\030\002 \001(\tH\000\022\016\n\004utf8\030\003 \001(\tH\000\022\014\n\002bs\030\004 \001(\014H\000B"
-    "\006\n\004data2C\n\017KrpcBaseService\0220\n\tcallUnary\022"
-    "\020.krpc.InputProto\032\021.krpc.OutputProtoB\030Z\026"
-    "google.golang.org/krpcb\006proto3"
+    "utf8\030\002 \001(\t\"B\n\013OutputProto\022\014\n\004code\030\001 \001(\005\022"
+    "\r\n\003msg\030\002 \001(\tH\000\022\016\n\004utf8\030\003 \001(\tH\000B\006\n\004data2C"
+    "\n\017KrpcBaseService\0220\n\tcallUnary\022\020.krpc.In"
+    "putProto\032\021.krpc.OutputProtob\006proto3"
 };
 static ::absl::once_flag descriptor_table_internal_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_internal_2eproto = {
     false,
     false,
-    230,
+    195,
     descriptor_table_protodef_internal_2eproto,
     "internal.proto",
     &descriptor_table_internal_2eproto_once,
@@ -457,18 +454,15 @@ OutputProto::OutputProto(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.c_ = from._impl_.c_;
+  _impl_.code_ = from._impl_.code_;
   switch (data_case()) {
     case DATA_NOT_SET:
       break;
-      case kM:
-        new (&_impl_.data_.m_) decltype(_impl_.data_.m_){arena, from._impl_.data_.m_};
+      case kMsg:
+        new (&_impl_.data_.msg_) decltype(_impl_.data_.msg_){arena, from._impl_.data_.msg_};
         break;
       case kUtf8:
         new (&_impl_.data_.utf8_) decltype(_impl_.data_.utf8_){arena, from._impl_.data_.utf8_};
-        break;
-      case kBs:
-        new (&_impl_.data_.bs_) decltype(_impl_.data_.bs_){arena, from._impl_.data_.bs_};
         break;
   }
 
@@ -483,7 +477,7 @@ PROTOBUF_NDEBUG_INLINE OutputProto::Impl_::Impl_(
 
 inline void OutputProto::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.c_ = {};
+  _impl_.code_ = {};
 }
 OutputProto::~OutputProto() {
   // @@protoc_insertion_point(destructor:krpc.OutputProto)
@@ -503,16 +497,12 @@ void OutputProto::clear_data() {
 // @@protoc_insertion_point(one_of_clear_start:krpc.OutputProto)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   switch (data_case()) {
-    case kM: {
-      _impl_.data_.m_.Destroy();
+    case kMsg: {
+      _impl_.data_.msg_.Destroy();
       break;
     }
     case kUtf8: {
       _impl_.data_.utf8_.Destroy();
-      break;
-    }
-    case kBs: {
-      _impl_.data_.bs_.Destroy();
       break;
     }
     case DATA_NOT_SET: {
@@ -566,16 +556,16 @@ const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL OutputProto::Get
   return OutputProto_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 4, 0, 30, 2>
+const ::_pbi::TcParseTable<0, 3, 0, 32, 2>
 OutputProto::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(OutputProto, _impl_._has_bits_),
     0, // no _extensions_
-    4, 0,  // max_field_number, fast_idx_mask
+    3, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    3,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     OutputProto_class_data_.base(),
@@ -585,30 +575,27 @@ OutputProto::_table_ = {
     ::_pbi::TcParser::GetTable<::krpc::OutputProto>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 c = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(OutputProto, _impl_.c_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.c_)}},
+    // int32 code = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(OutputProto, _impl_.code_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.code_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 c = 1;
-    {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.c_), _Internal::kHasBitsOffset + 0, 0,
+    // int32 code = 1;
+    {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.code_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-    // string m = 2;
-    {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.data_.m_), _Internal::kOneofCaseOffset + 0, 0,
+    // string msg = 2;
+    {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.data_.msg_), _Internal::kOneofCaseOffset + 0, 0,
     (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // string utf8 = 3;
     {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.data_.utf8_), _Internal::kOneofCaseOffset + 0, 0,
     (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // bytes bs = 4;
-    {PROTOBUF_FIELD_OFFSET(OutputProto, _impl_.data_.bs_), _Internal::kOneofCaseOffset + 0, 0,
-    (0 | ::_fl::kFcOneof | ::_fl::kBytes | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\20\0\1\4\0\0\0\0"
+    "\20\0\3\4\0\0\0\0"
     "krpc.OutputProto"
-    "m"
+    "msg"
     "utf8"
   }},
 };
@@ -619,7 +606,7 @@ PROTOBUF_NOINLINE void OutputProto::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.c_ = 0;
+  _impl_.code_ = 0;
   clear_data();
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -640,20 +627,20 @@ PROTOBUF_NOINLINE void OutputProto::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // int32 c = 1;
+  // int32 code = 1;
   if ((this_._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    if (this_._internal_c() != 0) {
+    if (this_._internal_code() != 0) {
       target =
           ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<1>(
-              stream, this_._internal_c(), target);
+              stream, this_._internal_code(), target);
     }
   }
 
   switch (this_.data_case()) {
-    case kM: {
-      const std::string& _s = this_._internal_m();
+    case kMsg: {
+      const std::string& _s = this_._internal_msg();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "krpc.OutputProto.m");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "krpc.OutputProto.msg");
       target = stream->WriteStringMaybeAliased(2, _s, target);
       break;
     }
@@ -662,11 +649,6 @@ PROTOBUF_NOINLINE void OutputProto::Clear() {
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
           _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "krpc.OutputProto.utf8");
       target = stream->WriteStringMaybeAliased(3, _s, target);
-      break;
-    }
-    case kBs: {
-      const std::string& _s = this_._internal_bs();
-      target = stream->WriteBytesMaybeAliased(4, _s, target);
       break;
     }
     default:
@@ -696,32 +678,26 @@ PROTOBUF_NOINLINE void OutputProto::Clear() {
   (void)cached_has_bits;
 
    {
-    // int32 c = 1;
+    // int32 code = 1;
     cached_has_bits = this_._impl_._has_bits_[0];
     if ((cached_has_bits & 0x00000001u) != 0) {
-      if (this_._internal_c() != 0) {
+      if (this_._internal_code() != 0) {
         total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-            this_._internal_c());
+            this_._internal_code());
       }
     }
   }
   switch (this_.data_case()) {
-    // string m = 2;
-    case kM: {
+    // string msg = 2;
+    case kMsg: {
       total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                      this_._internal_m());
+                                      this_._internal_msg());
       break;
     }
     // string utf8 = 3;
     case kUtf8: {
       total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                       this_._internal_utf8());
-      break;
-    }
-    // bytes bs = 4;
-    case kBs: {
-      total_size += 1 + ::google::protobuf::internal::WireFormatLite::BytesSize(
-                                      this_._internal_bs());
       break;
     }
     case DATA_NOT_SET: {
@@ -743,8 +719,8 @@ void OutputProto::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
 
   cached_has_bits = from._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000001u) != 0) {
-    if (from._internal_c() != 0) {
-      _this->_impl_.c_ = from._impl_.c_;
+    if (from._internal_code() != 0) {
+      _this->_impl_.code_ = from._impl_.code_;
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -759,11 +735,11 @@ void OutputProto::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
     }
 
     switch (oneof_from_case) {
-      case kM: {
+      case kMsg: {
         if (oneof_needs_init) {
-          _this->_impl_.data_.m_.InitDefault();
+          _this->_impl_.data_.msg_.InitDefault();
         }
-        _this->_impl_.data_.m_.Set(from._internal_m(), arena);
+        _this->_impl_.data_.msg_.Set(from._internal_msg(), arena);
         break;
       }
       case kUtf8: {
@@ -771,13 +747,6 @@ void OutputProto::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
           _this->_impl_.data_.utf8_.InitDefault();
         }
         _this->_impl_.data_.utf8_.Set(from._internal_utf8(), arena);
-        break;
-      }
-      case kBs: {
-        if (oneof_needs_init) {
-          _this->_impl_.data_.bs_.InitDefault();
-        }
-        _this->_impl_.data_.bs_.Set(from._internal_bs(), arena);
         break;
       }
       case DATA_NOT_SET:
@@ -799,7 +768,7 @@ void OutputProto::InternalSwap(OutputProto* PROTOBUF_RESTRICT PROTOBUF_NONNULL o
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.c_, other->_impl_.c_);
+  swap(_impl_.code_, other->_impl_.code_);
   swap(_impl_.data_, other->_impl_.data_);
   swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
 }

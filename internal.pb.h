@@ -130,9 +130,8 @@ class OutputProto final : public ::google::protobuf::Message
         &_OutputProto_default_instance_);
   }
   enum DataCase {
-    kM = 2,
+    kMsg = 2,
     kUtf8 = 3,
-    kBs = 4,
     DATA_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 1;
@@ -223,35 +222,34 @@ class OutputProto final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kCFieldNumber = 1,
-    kMFieldNumber = 2,
+    kCodeFieldNumber = 1,
+    kMsgFieldNumber = 2,
     kUtf8FieldNumber = 3,
-    kBsFieldNumber = 4,
   };
-  // int32 c = 1;
-  void clear_c() ;
-  ::int32_t c() const;
-  void set_c(::int32_t value);
+  // int32 code = 1;
+  void clear_code() ;
+  ::int32_t code() const;
+  void set_code(::int32_t value);
 
   private:
-  ::int32_t _internal_c() const;
-  void _internal_set_c(::int32_t value);
+  ::int32_t _internal_code() const;
+  void _internal_set_code(::int32_t value);
 
   public:
-  // string m = 2;
-  bool has_m() const;
-  void clear_m() ;
-  const std::string& m() const;
+  // string msg = 2;
+  bool has_msg() const;
+  void clear_msg() ;
+  const std::string& msg() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_m(Arg_&& arg, Args_... args);
-  std::string* PROTOBUF_NONNULL mutable_m();
-  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_m();
-  void set_allocated_m(std::string* PROTOBUF_NULLABLE value);
+  void set_msg(Arg_&& arg, Args_... args);
+  std::string* PROTOBUF_NONNULL mutable_msg();
+  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_msg();
+  void set_allocated_msg(std::string* PROTOBUF_NULLABLE value);
 
   private:
-  const std::string& _internal_m() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_m(const std::string& value);
-  std::string* PROTOBUF_NONNULL _internal_mutable_m();
+  const std::string& _internal_msg() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_msg(const std::string& value);
+  std::string* PROTOBUF_NONNULL _internal_mutable_msg();
 
   public:
   // string utf8 = 3;
@@ -270,35 +268,18 @@ class OutputProto final : public ::google::protobuf::Message
   std::string* PROTOBUF_NONNULL _internal_mutable_utf8();
 
   public:
-  // bytes bs = 4;
-  bool has_bs() const;
-  void clear_bs() ;
-  const std::string& bs() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_bs(Arg_&& arg, Args_... args);
-  std::string* PROTOBUF_NONNULL mutable_bs();
-  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_bs();
-  void set_allocated_bs(std::string* PROTOBUF_NULLABLE value);
-
-  private:
-  const std::string& _internal_bs() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_bs(const std::string& value);
-  std::string* PROTOBUF_NONNULL _internal_mutable_bs();
-
-  public:
   void clear_data();
   DataCase data_case() const;
   // @@protoc_insertion_point(class_scope:krpc.OutputProto)
  private:
   class _Internal;
-  void set_has_m();
+  void set_has_msg();
   void set_has_utf8();
-  void set_has_bs();
   inline bool has_data() const;
   inline void clear_has_data();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 4,
-                                   0, 30,
+  static const ::google::protobuf::internal::TcParseTable<0, 3,
+                                   0, 32,
                                    2>
       _table_;
 
@@ -319,13 +300,12 @@ class OutputProto final : public ::google::protobuf::Message
         const OutputProto& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t c_;
+    ::int32_t code_;
     union DataUnion {
       constexpr DataUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
-      ::google::protobuf::internal::ArenaStringPtr m_;
+      ::google::protobuf::internal::ArenaStringPtr msg_;
       ::google::protobuf::internal::ArenaStringPtr utf8_;
-      ::google::protobuf::internal::ArenaStringPtr bs_;
     } data_;
     ::uint32_t _oneof_case_[1];
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -617,113 +597,113 @@ inline void InputProto::set_allocated_utf8(std::string* PROTOBUF_NULLABLE value)
 
 // OutputProto
 
-// int32 c = 1;
-inline void OutputProto::clear_c() {
+// int32 code = 1;
+inline void OutputProto::clear_code() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.c_ = 0;
+  _impl_.code_ = 0;
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline ::int32_t OutputProto::c() const {
-  // @@protoc_insertion_point(field_get:krpc.OutputProto.c)
-  return _internal_c();
+inline ::int32_t OutputProto::code() const {
+  // @@protoc_insertion_point(field_get:krpc.OutputProto.code)
+  return _internal_code();
 }
-inline void OutputProto::set_c(::int32_t value) {
-  _internal_set_c(value);
+inline void OutputProto::set_code(::int32_t value) {
+  _internal_set_code(value);
   _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:krpc.OutputProto.c)
+  // @@protoc_insertion_point(field_set:krpc.OutputProto.code)
 }
-inline ::int32_t OutputProto::_internal_c() const {
+inline ::int32_t OutputProto::_internal_code() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.c_;
+  return _impl_.code_;
 }
-inline void OutputProto::_internal_set_c(::int32_t value) {
+inline void OutputProto::_internal_set_code(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.c_ = value;
+  _impl_.code_ = value;
 }
 
-// string m = 2;
-inline bool OutputProto::has_m() const {
-  return data_case() == kM;
+// string msg = 2;
+inline bool OutputProto::has_msg() const {
+  return data_case() == kMsg;
 }
-inline void OutputProto::set_has_m() {
-  _impl_._oneof_case_[0] = kM;
+inline void OutputProto::set_has_msg() {
+  _impl_._oneof_case_[0] = kMsg;
 }
-inline void OutputProto::clear_m() {
+inline void OutputProto::clear_msg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() == kM) {
-    _impl_.data_.m_.Destroy();
+  if (data_case() == kMsg) {
+    _impl_.data_.msg_.Destroy();
     clear_has_data();
   }
 }
-inline const std::string& OutputProto::m() const
+inline const std::string& OutputProto::msg() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:krpc.OutputProto.m)
-  return _internal_m();
+  // @@protoc_insertion_point(field_get:krpc.OutputProto.msg)
+  return _internal_msg();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void OutputProto::set_m(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void OutputProto::set_msg(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kM) {
+  if (data_case() != kMsg) {
     clear_data();
 
-    set_has_m();
-    _impl_.data_.m_.InitDefault();
+    set_has_msg();
+    _impl_.data_.msg_.InitDefault();
   }
-  _impl_.data_.m_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:krpc.OutputProto.m)
+  _impl_.data_.msg_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:krpc.OutputProto.msg)
 }
-inline std::string* PROTOBUF_NONNULL OutputProto::mutable_m()
+inline std::string* PROTOBUF_NONNULL OutputProto::mutable_msg()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_m();
-  // @@protoc_insertion_point(field_mutable:krpc.OutputProto.m)
+  std::string* _s = _internal_mutable_msg();
+  // @@protoc_insertion_point(field_mutable:krpc.OutputProto.msg)
   return _s;
 }
-inline const std::string& OutputProto::_internal_m() const {
+inline const std::string& OutputProto::_internal_msg() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  if (data_case() != kM) {
+  if (data_case() != kMsg) {
     return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
   }
-  return _impl_.data_.m_.Get();
+  return _impl_.data_.msg_.Get();
 }
-inline void OutputProto::_internal_set_m(const std::string& value) {
+inline void OutputProto::_internal_set_msg(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kM) {
+  if (data_case() != kMsg) {
     clear_data();
 
-    set_has_m();
-    _impl_.data_.m_.InitDefault();
+    set_has_msg();
+    _impl_.data_.msg_.InitDefault();
   }
-  _impl_.data_.m_.Set(value, GetArena());
+  _impl_.data_.msg_.Set(value, GetArena());
 }
-inline std::string* PROTOBUF_NONNULL OutputProto::_internal_mutable_m() {
+inline std::string* PROTOBUF_NONNULL OutputProto::_internal_mutable_msg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kM) {
+  if (data_case() != kMsg) {
     clear_data();
 
-    set_has_m();
-    _impl_.data_.m_.InitDefault();
+    set_has_msg();
+    _impl_.data_.msg_.InitDefault();
   }
-  return _impl_.data_.m_.Mutable( GetArena());
+  return _impl_.data_.msg_.Mutable( GetArena());
 }
-inline std::string* PROTOBUF_NULLABLE OutputProto::release_m() {
+inline std::string* PROTOBUF_NULLABLE OutputProto::release_msg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:krpc.OutputProto.m)
-  if (data_case() != kM) {
+  // @@protoc_insertion_point(field_release:krpc.OutputProto.msg)
+  if (data_case() != kMsg) {
     return nullptr;
   }
   clear_has_data();
-  return _impl_.data_.m_.Release();
+  return _impl_.data_.msg_.Release();
 }
-inline void OutputProto::set_allocated_m(std::string* PROTOBUF_NULLABLE value) {
+inline void OutputProto::set_allocated_msg(std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (has_data()) {
     clear_data();
   }
   if (value != nullptr) {
-    set_has_m();
-    _impl_.data_.m_.InitAllocated(value, GetArena());
+    set_has_msg();
+    _impl_.data_.msg_.InitAllocated(value, GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:krpc.OutputProto.m)
+  // @@protoc_insertion_point(field_set_allocated:krpc.OutputProto.msg)
 }
 
 // string utf8 = 3;
@@ -809,91 +789,6 @@ inline void OutputProto::set_allocated_utf8(std::string* PROTOBUF_NULLABLE value
     _impl_.data_.utf8_.InitAllocated(value, GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:krpc.OutputProto.utf8)
-}
-
-// bytes bs = 4;
-inline bool OutputProto::has_bs() const {
-  return data_case() == kBs;
-}
-inline void OutputProto::set_has_bs() {
-  _impl_._oneof_case_[0] = kBs;
-}
-inline void OutputProto::clear_bs() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() == kBs) {
-    _impl_.data_.bs_.Destroy();
-    clear_has_data();
-  }
-}
-inline const std::string& OutputProto::bs() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:krpc.OutputProto.bs)
-  return _internal_bs();
-}
-template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void OutputProto::set_bs(Arg_&& arg, Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kBs) {
-    clear_data();
-
-    set_has_bs();
-    _impl_.data_.bs_.InitDefault();
-  }
-  _impl_.data_.bs_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:krpc.OutputProto.bs)
-}
-inline std::string* PROTOBUF_NONNULL OutputProto::mutable_bs()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_bs();
-  // @@protoc_insertion_point(field_mutable:krpc.OutputProto.bs)
-  return _s;
-}
-inline const std::string& OutputProto::_internal_bs() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  if (data_case() != kBs) {
-    return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
-  }
-  return _impl_.data_.bs_.Get();
-}
-inline void OutputProto::_internal_set_bs(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kBs) {
-    clear_data();
-
-    set_has_bs();
-    _impl_.data_.bs_.InitDefault();
-  }
-  _impl_.data_.bs_.Set(value, GetArena());
-}
-inline std::string* PROTOBUF_NONNULL OutputProto::_internal_mutable_bs() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (data_case() != kBs) {
-    clear_data();
-
-    set_has_bs();
-    _impl_.data_.bs_.InitDefault();
-  }
-  return _impl_.data_.bs_.Mutable( GetArena());
-}
-inline std::string* PROTOBUF_NULLABLE OutputProto::release_bs() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:krpc.OutputProto.bs)
-  if (data_case() != kBs) {
-    return nullptr;
-  }
-  clear_has_data();
-  return _impl_.data_.bs_.Release();
-}
-inline void OutputProto::set_allocated_bs(std::string* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (has_data()) {
-    clear_data();
-  }
-  if (value != nullptr) {
-    set_has_bs();
-    _impl_.data_.bs_.InitAllocated(value, GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:krpc.OutputProto.bs)
 }
 
 inline bool OutputProto::has_data() const {

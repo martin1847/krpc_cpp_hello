@@ -43,15 +43,22 @@ using krpc::OutputProto;
 // Logic and data behind the server's behavior.
 class HelloServiceImpl final : public KrpcBaseService::CallbackService {
  public:
-  HelloServiceImpl() : KrpcBaseService::CallbackService("/Demo/KrpcCpp/hello") {}
+  HelloServiceImpl()
+      : KrpcBaseService::CallbackService("/Demo/KrpcCpp/hello") {}
 
   ServerUnaryReactor* callUnary(CallbackServerContext* context,
                                 const InputProto* request,
                                 OutputProto* reply) override {
     std::string prefix("Hello KRPC : get ");
-    auto msg_json = "\"" + prefix + request->utf8() + "\"";
-    std::cout << prefix << "\t[debug]\t " << msg_json << std::endl;
-    reply->set_utf8(msg_json);
+    auto input_json = request->utf8();
+    if (input_json.empty() || input_json == "null") {
+      reply->set_code(GRPC_STATUS_INVALID_ARGUMENT);
+      reply->set_msg("invalid argument,input json is empty");
+    } else {
+      auto msg_json = "\"" + prefix + input_json + "\"";
+      std::cout << prefix << "\t[debug]\t " << msg_json << std::endl;
+      reply->set_utf8(msg_json);
+    }
 
     ServerUnaryReactor* reactor = context->DefaultReactor();
     reactor->Finish(Status::OK);

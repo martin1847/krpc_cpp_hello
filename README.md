@@ -22,6 +22,10 @@ cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR
 make -j 4
 ./krpc_server 
 # Server listening on 0.0.0.0:50051
+# Test
+rpcurl $REMOTE/Demo/KrpcCpp/hello          
+# ❌
+# {"code":3,"msg":"invalid argument,input json is empty"}
 rpcurl $REMOTE/Demo/KrpcCpp/hello -d '12341'
 # 
 # {
