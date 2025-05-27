@@ -57,7 +57,7 @@ class HelloServiceImpl final : public KrpcBaseService::CallbackService {
     } else {
       auto msg_json = "\"" + prefix + input_json + "\"";
       std::cout << prefix << "\t[debug]\t " << msg_json << std::endl;
-      reply->set_utf8(msg_json);
+      reply->set_utf8(std::move(msg_json));
     }
 
     ServerUnaryReactor* reactor = context->DefaultReactor();
